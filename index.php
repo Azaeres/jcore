@@ -13,7 +13,7 @@ $doc->js = function() {
 };
 
 $doc->title = function($chain) {
-	echo 'Network Bindings';
+	echo 'jCore v0.1';
 };
 
 $doc->desc = $doc->title;
@@ -22,11 +22,11 @@ $doc->author = function($chain) {
 	echo 'Ryan Barry';
 };
 
-$doc->header = function($chain) {
+$doc->main = function($chain) {
 	?>
-	<section class="box">
-		<h1>Hello, World!</h1>
-	</section>
+	<div class="box">
+		Server time: <span data-bind='text: datetime.month'></span> <span data-bind='text: datetime.mday'></span>, <span data-bind='text: datetime.hours'>0</span>:<span data-bind='text: datetime.minutes'>00</span>:<span data-bind='text: datetime.seconds'>00</span>.
+	</div>
 	<?php
 };
 
