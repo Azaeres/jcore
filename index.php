@@ -26,7 +26,7 @@ $doc->author = function($chain) {
 $doc->main = function($chain) {
 	?>
 	<div class="box">
-		Server time: <span data-bind='text: datetime.month'></span> <span data-bind='text: datetime.mday'></span> <span data-bind='text: datetime.hours'>0</span>:<span data-bind='text: datetime.minutes'>00</span>:<span data-bind='text: datetime.seconds'>00</span>.
+		Server time: <span data-bind='text: datetime.month'>Syncing...</span> <span data-bind='text: datetime.mday'></span> <span data-bind='text: datetime.hours'>0</span>:<span data-bind='text: datetime.minutes'>00</span>:<span data-bind='text: datetime.seconds'>00</span>.
 	</div>
 	<?php
 };

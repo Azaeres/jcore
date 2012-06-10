@@ -74,21 +74,27 @@ td { vertical-align: top; }
    Author: Ryan Barry
    ========================================================================== */
 
+
 .box {
-  border:1px solid;
+  border:1px solid #ddf;
+  background-color:#eef;
   margin:70px 70px;
   text-align:center;
-}
-
-.box {
   font-size:36px;
-  background-color: #fff;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
 }
 
-
-
-
-
+ 
+/*
+ul { list-style-type: none; margin: 1em 0; background-color: #cde; padding: 1em; border-radius: 0.5em;  }
+ul li a { color: Gray; font-size: 90%; text-decoration: none }
+ul li a:hover { text-decoration: underline }
+input:not([type]), input[type=text] { width: 30em; }
+input[disabled] { text-decoration: line-through; border-color: Silver; background-color: Silver; }
+textarea { width: 30em; height: 6em; }
+form { margin-top: 1em; margin-bottom: 1em; }
+ */
 
 
 

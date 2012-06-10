@@ -77,7 +77,7 @@ class InlineText extends FunctionChain {
 // HTML 5 document chain.
 //
 class HtmlDoc extends FunctionChain {
-	public $title, $desc, $author, $header, $main, $footer;
+	public $title, $desc, $author, $header, $main, $footer, $js;
 
 	public function __construct() {
 		parent::__construct(array(
@@ -97,7 +97,7 @@ class HtmlDoc extends FunctionChain {
 
 	<meta name="viewport" content="width=device-width">
 
-	<link rel="stylesheet" href="css/4676e5a.css">
+	<link rel="stylesheet" href="css/ee61ca2.css">
 
 	<script src="js/libs/modernizr-2.5.3.min.js"></script>
 </head>
@@ -110,7 +110,7 @@ class HtmlDoc extends FunctionChain {
 	<script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.2.min.js"><\/script>')</script>
 
 	<!-- scripts concatenated and minified via ant build script-->
-	<script src="js/a7f84a0.js"></script>
+	<?php $chain->next(); ?>
 	<!-- end scripts-->
 
 	<script>
@@ -124,23 +124,26 @@ class HtmlDoc extends FunctionChain {
 </html>
 <?php
 			}
-			// Title.
+			// Title
 			,function($chain) {
 				echo 'Untitled';
 			}
-			// Description.
+			// Description
 			,function($chain) {
 			}
-			// Author.
+			// Author
 			,function($chain) {
 			}
-			// Header.
+			// Header
 			,function($chain) {
 			}
-			// Main.
+			// Main
 			,function($chain) {
 			}
-			// Footer.
+			// Footer
+			,function($chain) {
+			}
+			// Javascript includes
 			,function($chain) {
 			}
 		));
@@ -151,6 +154,7 @@ class HtmlDoc extends FunctionChain {
 		$this->header = &$this->chain[4];
 		$this->main = &$this->chain[5];
 		$this->footer = &$this->chain[6];
+		$this->js = &$this->chain[7];
 	}
 }
 
