@@ -1,28 +1,3 @@
-/******************************************************************
-
- **/
-
-jCore = function() {
-};
-jCore.synchronize = function(uri, init, set) {
-	var obj = init();
-	obj.synchronize = function() {
-		$.ajax(uri, {
-			success: function(data) {
-				data = JSON.parse(data);
-				set(data);
-			}
-		});
-
-		return this;
-	};
-
-	return obj.synchronize();
-};
-
-
-
-
 
 
 $(document).ready(function() {
@@ -58,7 +33,15 @@ $(document).ready(function() {
 
 			var mapping = {
 				'minutes': propertyMapping,
-				'seconds': propertyMapping
+				'seconds': propertyMapping,
+				'mday': {
+					create: function(options) {
+						return ko.observable(options.data+', ');
+					},
+					update: function(options) {
+						return options.data+', ';
+					}
+				}
 			};
 
 			return ko.mapping.fromJS({
