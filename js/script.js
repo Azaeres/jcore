@@ -17,7 +17,7 @@ $(document).ready(function() {
 	function JCoreViewModel() {
 		var self = this;
 
-		self.datetime = jCore.synchronize('/jcore/ajax/', function() {
+		self.datetime = jCore.synchronize('/jcore/ajax/?res=10', function() {
 			var create = function(options) {
 				return ko.observable(ZeroPad(options.data, 2));
 			};

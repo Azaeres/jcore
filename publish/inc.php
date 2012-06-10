@@ -8,7 +8,7 @@ function _d($arg) {
 
 
 // Simple function chain class.
-//
+// 
 class FunctionChain {
 
 	private $_ptr = 0;
@@ -97,7 +97,7 @@ class HtmlDoc extends FunctionChain {
 
 	<meta name="viewport" content="width=device-width">
 
-	<link rel="stylesheet" href="css/ee61ca2.css">
+	<?php $chain->next(); ?>
 
 	<script src="js/libs/modernizr-2.5.3.min.js"></script>
 </head>
@@ -134,6 +134,12 @@ class HtmlDoc extends FunctionChain {
 			// Author
 			,function($chain) {
 			}
+			// CSS
+			,function($chain) {
+				?>
+					<link rel="stylesheet" href="css/style.css">
+				<?php
+			}
 			// Header
 			,function($chain) {
 			}
@@ -145,16 +151,21 @@ class HtmlDoc extends FunctionChain {
 			}
 			// Javascript includes
 			,function($chain) {
+				?>
+					<script src="js/plugins.js"></script>
+					<script src="js/script.js"></script>
+				<?php
 			}
 		));
 
 		$this->title = &$this->chain[1];
 		$this->desc = &$this->chain[2];
 		$this->author = &$this->chain[3];
-		$this->header = &$this->chain[4];
-		$this->main = &$this->chain[5];
-		$this->footer = &$this->chain[6];
-		$this->js = &$this->chain[7];
+		$this->css = &$this->chain[4];
+		$this->header = &$this->chain[5];
+		$this->main = &$this->chain[6];
+		$this->footer = &$this->chain[7];
+		$this->js = &$this->chain[8];
 	}
 }
 

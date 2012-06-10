@@ -2,34 +2,29 @@
 
 include('../inc.php');
 
-date_default_timezone_set('America/Los_Angeles');
-$currentDate = getdate();
-//_d($today);
 
-$json = json_encode($currentDate);
+$resId = filter_input(INPUT_GET | INPUT_POST, "res", FILTER_SANITIZE_NUMBER_INT);
 
-echo $json;
+$json = '';
 
+$resources = array(
+	'10' => function() {
+		// Returns the current server time.
+		date_default_timezone_set('America/Los_Angeles');
+		return getdate();
+	}
+);
+
+$resource = NULL;
+
+if (isset($resources[$resId])) {
+	$resource = $resources[$resId]();
+}
+
+echo json_encode($resource);
 exit(0);
 
 
-/*
-$json = '';
-if (isset($_POST['tasks'])) {
-	$json = $_POST['tasks'];
-
-	echo '<pre>';
-
-	//echo 'Post: '.print_r($json, 1);
-	$decodedJson = json_decode($json, true);
-
-	echo print_r($decodedJson, 1);
-
-	echo '</pre>';
-}
-else {
-	echo '[{"title":"Wire the money to Panama","isDone":true},{"title":"Get hair dye, beard trimmer, dark glasses and \"passport\"","isDone":false},{"title":"Book taxi to airport","isDone":false},{"title":"Arrange for someone to look after the cat","isDone":false}]';
-}
 
 
-*/
+
