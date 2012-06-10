@@ -1,7 +1,8 @@
 <?php
 
-// Convenient dump.
-//
+/**
+ * Convenience function for var_dump. Dumps vars as pretty print.
+ */
 function _d($arg) {
 	var_dump($arg);
 }
