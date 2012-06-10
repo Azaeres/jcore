@@ -1,5 +1,0 @@
-window.log=function(){log.history=log.history||[];log.history.push(arguments);if(this.console){var a=arguments;a.callee=a.callee.caller;a=[].slice.call(a);typeof console.log==="object"?log.apply.call(console.log,console,a):console.log.apply(console,a)}};
-(function(a){function c(){}for(var d="assert,count,debug,dir,dirxml,error,exception,group,groupCollapsed,groupEnd,info,log,markTimeline,profile,profileEnd,time,timeEnd,trace,warn".split(","),b;b=d.pop();)a[b]=a[b]||c})(function(){try{return console.log(),window.console}catch(a){return window.console={}}}());
-function ZeroPad(c,b){for(var a=c+"";a.length<b;)a="0"+a;return a}
-$(document).ready(function(){ko.applyBindings(new function(){var c=this;c.datetime=jCore.synchronize("/jcore/ajax/",function(){var b={create:function(a){return ko.observable(ZeroPad(a.data,2))},update:function(a){return ZeroPad(a.data,2)}};return ko.mapping.fromJS({month:"",mday:"",hours:"0",minutes:"0",seconds:"0"},{minutes:b,seconds:b,mday:{create:function(a){return ko.observable(a.data+", ")},update:function(a){return a.data+", "}}})},function(b){ko.mapping.fromJS(b,c.datetime)});setInterval(c.datetime.synchronize,
-1E3)})});
