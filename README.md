@@ -4,11 +4,11 @@ README
 The jCore resource syncronization system.
 
 Makes use of the following technologies:
-Redis 2.4.14
-PHP 5.3.10
-JSON 3
-jQuery 1.7.2
-Knockout 2.1.0 / Knockout Mapping
+* Redis 2.4.14
+* PHP 5.3.10
+* JSON 3
+* jQuery 1.7.2
+* Knockout 2.1.0 / Knockout Mapping
 
 Installation
 ------------
