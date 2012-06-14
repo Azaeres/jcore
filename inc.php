@@ -1,20 +1,47 @@
 <?php
 
 /**
+ * jCore inc.php
+ * 
+ * This file demonstrates the rich information that can be included in
+ * in-code documentation through DocBlocks and tags.
+ * @author Ryan Barry <ryanc.barry@yahoo.com>
+ * @version 0.0.1
+ * @package jCore
+ */
+
+/**
  * Convenience function for var_dump. Dumps vars as pretty print.
+ *
+ * @param  arg The argument to dump.
  */
 function _d($arg) {
 	var_dump($arg);
 }
 
-
-// Simple function chain class.
-// 
+/**
+ * Simple function chain class.
+ *
+ * 
+ */
 class FunctionChain {
 
 	private $_ptr = 0;
+
+	/**
+	 * A series of anonymous functions.
+	 * 
+	 * @param array A series of anonymous functions.
+	 */
 	public $chain = array();
 
+	/**
+	 * Creates a function chain.
+	 *
+	 * @method int __construct() __construct(array $c) Creates a function chain.
+	 * @throws  If $c is not an array.
+	 * @param  $c A series (array) of anonymous functions (closures) that form the chain.
+	 */
 	public function __construct($c) {
 		if (is_array($c)) 
 			$this->chain = $c;
@@ -22,6 +49,13 @@ class FunctionChain {
             throw new Exception("Function chain must be initialized to an array of anonymous functions.");
 	}
 
+	/**
+	 *
+	 * Calls the next function in the chain.
+	 * 
+	 * @method next() Calls the next function in the chain.
+	 * 
+	 */
 	public function next() {
 		$this->_ptr++;
 		$c = $this;
@@ -33,6 +67,13 @@ class FunctionChain {
 		}
 	}
 
+	/**
+	 *
+	 * Runs the chain, starting from the first function.
+	 * 
+	 * @method run() Runs the chain, starting from the first function.
+	 * 
+	 */
 	public function run() {
 		$this->_ptr = 0;
 		$chain = $this;
@@ -49,11 +90,19 @@ class FunctionChain {
 }
 
 
-// Inline text element.
-//
+/**
+ * Inline text element.
+ */
 class InlineText extends FunctionChain {
 	public $className, $text;
 
+	/**
+	 *
+	 * Creates a function chain that renders an inline text element.
+	 * 
+	 * @method __construct() Creates a function chain that renders an inline text element.
+	 * 
+	 */
 	public function __construct() {
 		parent::__construct(array(
 			// Element.
@@ -75,8 +124,9 @@ class InlineText extends FunctionChain {
 	}
 }
 
-// HTML 5 document chain.
-//
+/*
+ * HTML 5 document chain.
+ */
 class HtmlDoc extends FunctionChain {
 	public $title, $desc, $author, $header, $main, $footer, $js;
 

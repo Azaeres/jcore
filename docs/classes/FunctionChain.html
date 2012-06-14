@@ -28,7 +28,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">22</span></a></li>
+                <span class="label label-info">15</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul></ul></a></li>
 <li><a href="../deprecated.html"><i class="icon-stop"></i> Deprecated elements 
@@ -52,16 +52,13 @@
 <ul class="side-nav nav nav-list">
 <li class="nav-header">
 <i class="icon-custom icon-method"></i> Methods</li>
-<li class="method public "><a href="#__construct" title="__construct :: "><span class="description">__construct()
-        </span><pre>__construct()</pre></a></li>
-<li class="method public "><a href="#next" title="next :: "><span class="description">next()
-        </span><pre>next()</pre></a></li>
+<li class="method public "><a href="#__construct" title="__construct :: Creates a function chain."><span class="description">Creates a function chain.</span><pre>__construct()</pre></a></li>
+<li class="method public "><a href="#next" title="next :: Calls the next function in the chain."><span class="description">Calls the next function in the chain.</span><pre>next()</pre></a></li>
 <li class="method public "><a href="#removeLink" title="removeLink :: "><span class="description">removeLink()
         </span><pre>removeLink()</pre></a></li>
 <li class="method public "><a href="#reset" title="reset :: "><span class="description">reset()
         </span><pre>reset()</pre></a></li>
-<li class="method public "><a href="#run" title="run :: "><span class="description">run()
-        </span><pre>run()</pre></a></li>
+<li class="method public "><a href="#run" title="run :: Runs the chain, starting from the first function."><span class="description">Runs the chain, starting from the first function.</span><pre>run()</pre></a></li>
 <li class="nav-header">
 <i class="icon-custom icon-property"></i> Properties</li>
 <li class="property public "><a href="#%24chain" title="$chain :: "><span class="description">$chain</span><pre>$chain</pre></a></li>
@@ -79,29 +76,45 @@
 <span class="divider">\</span><a href="../classes/FunctionChain.html">FunctionChain</a>
 </li>
 </ul>
-<div href="../classes/FunctionChain.html" class="element class"><div class="details">
+<div href="../classes/FunctionChain.html" class="element class">
+<p class="short_description">Simple function chain class.</p>
+<div class="details">
+<p class="long_description"></p>
 <h3>
 <i class="icon-custom icon-method"></i> Methods</h3>
 <a name="__construct" id="__construct"></a><div class="element clickable method public __construct" data-toggle="collapse" data-target=".__construct .collapse">
-<h2>__construct()
-        </h2>
-<pre>__construct($c) </pre>
+<h2>Creates a function chain.</h2>
+<pre>__construct(\$c $c) </pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>method</th>
+<td>Creates a function chain.</td>
+</tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$c</h4>
-<code></code>
+<code>\$c</code><p>A series (array) of anonymous functions (closures) that form the chain.</p>
 </div>
+<h3>Exceptions</h3>
+<table class="table table-bordered"><tr>
+<th><code>\If</code></th>
+<td>$c is not an array.</td>
+</tr></table>
 </div></div>
 </div>
 <a name="next" id="next"></a><div class="element clickable method public next" data-toggle="collapse" data-target=".next .collapse">
-<h2>next()
-        </h2>
+<h2>Calls the next function in the chain.</h2>
 <pre>next() </pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>method</th>
+<td>Calls the next function in the chain.</td>
+</tr></table>
+</div></div>
 </div>
 <a name="removeLink" id="removeLink"></a><div class="element clickable method public removeLink" data-toggle="collapse" data-target=".removeLink .collapse">
 <h2>removeLink()
@@ -125,11 +138,16 @@
 <div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
 </div>
 <a name="run" id="run"></a><div class="element clickable method public run" data-toggle="collapse" data-target=".run .collapse">
-<h2>run()
-        </h2>
+<h2>Runs the chain, starting from the first function.</h2>
 <pre>run() </pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
+<div class="row collapse"><div class="detail-description">
+<p class="long_description"></p>
+<table class="table table-bordered"><tr>
+<th>method</th>
+<td>Runs the chain, starting from the first function.</td>
+</tr></table>
+</div></div>
 </div>
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
@@ -145,13 +163,14 @@
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><p class="long_description"></p></div></div>
 </div>
-</div></div>
+</div>
+</div>
 </div>
 </div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a5</a> and<br>
-            generated on 2012-06-10T16:50:49-07:00.<br></footer></div>
+            generated on 2012-06-10T18:16:52-07:00.<br></footer></div>
 </div>
 </body>
 </html>
