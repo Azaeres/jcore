@@ -1,6 +1,9 @@
 README
 ======
 
+Introduction
+------------
+
 The jCore resource syncronization system.
 
 Makes use of the following technologies:
@@ -20,12 +23,12 @@ That's it. No, really.
 Example (prototype)
 -------------------
 
-var model = jCore.synchronize('/ajax/?res=10', function() {
-	// Create function
-}, function() {
-	// Update function
-});
+	var model = jCore.synchronize('/ajax/?res=10', function() {
+		// Create function
+	}, function() {
+		// Update function
+	});
 
-// Schedules the model to sync regularly.
-setInterval(model.synchronize, 1000);
+	// Schedules the model to sync regularly.
+	setInterval(model.synchronize, 1000);
 
