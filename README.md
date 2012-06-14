@@ -32,7 +32,7 @@ Note: jCore is designed to "play nice" with Knockout, but is not tightly coupled
 		return ko.observable();
 	}, function(value) {
 		// Update function
-		self.resource(value.text);
+		self.resource(value);
 	});
 
 	// Schedules the model to sync regularly.

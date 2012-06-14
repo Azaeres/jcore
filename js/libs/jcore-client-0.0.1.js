@@ -30,7 +30,10 @@
 						}
 					}
 					else {
-						throw('Error '+data.error+': '+data.desc);
+						var err = new Error();
+						err.name = 'Error '+data.error;
+						err.message = data.desc;
+						throw(err);
 					}
 				}
 			});
