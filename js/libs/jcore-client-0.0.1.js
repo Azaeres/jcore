@@ -1,17 +1,17 @@
-/******************************************************************
-
- **/
+/*
+ * 
+ */
  
-(function(a) {
-	a.jCore = function() {
+(function(w, undefined) {
+	w.jCore = function() {
 	};
-	a.jCore.synchronize = function(uri, init, set) {
-		var obj = init();
+	w.jCore.synchronize = function(uri, create, update) {
+		var obj = create();
 		obj.synchronize = function() {
 			$.ajax(uri, {
 				success: function(data) {
 					data = JSON.parse(data);
-					set(data);
+					update(data);
 				}
 			});
 
