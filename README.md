@@ -11,7 +11,7 @@ Makes use of the following technologies:
 * PHP 5.3.10
 * JSON 3
 * jQuery 1.7.2
-* Knockout 2.1.0 / Knockout Mapping
+* Knockout 2.1.0 / Knockout Mapping (optional)
 
 Installation
 ------------
@@ -23,12 +23,16 @@ That's it. No, really.
 Example (prototype)
 -------------------
 
-	var model = jCore.synchronize('/ajax/?res=10', function() {
+	self.resource = jCore.synchronize('/jcore/ajax/?res=/hello-world', function() {
 		// Create function
-	}, function() {
+		return ko.observable();
+	}, function(data) {
 		// Update function
+		if (data.error === 0) {
+			self.resource(data.value);
+		}
 	});
 
 	// Schedules the model to sync regularly.
-	setInterval(model.synchronize, 1000);
+	setInterval(self.resource.synchronize, 1000);
 

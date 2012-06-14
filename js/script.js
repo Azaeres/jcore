@@ -17,6 +17,19 @@ $(document).ready(function() {
 	function JCoreViewModel() {
 		var self = this;
 
+		var resourceUri = '/jcore/ajax/?res=/hello-world';
+		self.resource = jCore.synchronize(resourceUri, function() {
+			return ko.observable();
+		}, function(data) {
+			if (data.error === 0) {
+				self.resource(data.value);
+			}
+		});
+
+	//	setInterval(self.resource.synchronize, 1000);
+
+		/*
+
 		self.datetime = jCore.synchronize('/jcore/ajax/?res=10', function() {
 			var create = function(options) {
 				return ko.observable(ZeroPad(options.data, 2));
@@ -57,6 +70,8 @@ $(document).ready(function() {
 		});
 
 		setInterval(self.datetime.synchronize, 1000);
+
+		 */
 	}
 
 	ko.applyBindings(new JCoreViewModel());

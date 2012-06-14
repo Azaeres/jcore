@@ -44,7 +44,7 @@ $doc->js = function($chain) use ($defaultJs) {
 };
 
 $doc->title = function($chain) {
-	echo 'jCore v0.1';
+	echo 'jCore v0.0.1';
 };
 
 $doc->desc = $doc->title;
@@ -54,9 +54,15 @@ $doc->author = function($chain) {
 };
 
 $doc->main = function($chain) {
+
+/*
+		Server time: <span data-bind='text: datetime.month'>Syncing...</span> <span data-bind='text: datetime.mday'></span> <span data-bind='text: datetime.hours'>0</span>:<span data-bind='text: datetime.minutes'>00</span>:<span data-bind='text: datetime.seconds'>00</span>.
+
+ */
 	?>
 	<div class="box">
-		Server time: <span data-bind='text: datetime.month'>Syncing...</span> <span data-bind='text: datetime.mday'></span> <span data-bind='text: datetime.hours'>0</span>:<span data-bind='text: datetime.minutes'>00</span>:<span data-bind='text: datetime.seconds'>00</span>.
+		<code data-bind="text: resource">
+		</code>
 	</div>
 	<?php
 };

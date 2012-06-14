@@ -24,6 +24,12 @@ catch (Exception $e) {
     echo $e->getMessage();
 }
 
+$redis->set('/hello-world', 'Hi, Redis!');
+$value = $redis->get('/hello-world');
+var_dump($value);
+
+echo ($redis->exists("Santa Claus")) ? "true" : "false";
+
 
 
 
