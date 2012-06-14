@@ -25,6 +25,8 @@ That's it. No, really.
 Example (prototype)
 -------------------
 
+Note: jCore is designed to "play nice" with Knockout, but is not tightly coupled to it.
+
 	self.resource = jCore.synchronize('/jcore/ajax/?res=/hello-world', function() {
 		// Create function
 		return ko.observable();
