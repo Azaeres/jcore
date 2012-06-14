@@ -3,32 +3,20 @@
 include('../inc.php');
 
 
-// Sanitizes res id.
-// Removes all characters except letters, digits and $-_.+!*'(),{}|\\^~[]`<>#%";/?:@&=
+/*
+ * Sanitizes res id.
+ *
+ * Removes all characters except letters, digits and $-_.+!*'(),{}|\\^~[]`<>#%";/?:@&=
+ */
+
 $resId = filter_input(INPUT_GET | INPUT_POST, "res", FILTER_SANITIZE_URL);
 
 
-/*
-$resources = array(
-	'10' => function() {
-		// Returns the current server time.
-		date_default_timezone_set('America/Los_Angeles');
-		return getdate();
-	}
-);
- */
 
 define('JC_NO_ERROR', 0);
 define('JC_DB_CONNECT_ERROR', 1);
 define('HTTP_NOT_FOUND', 404);
 $resource = array('error' => HTTP_NOT_FOUND);
-
-/*
-if (isset($resources[$resId])) {
-	$resource['error'] = JC_NO_ERROR;
-	$resource['value'] = $resources[$resId]();
-}
- */
 
 if (!isset($resource['value'])) {
 	// Look up uri in redis.

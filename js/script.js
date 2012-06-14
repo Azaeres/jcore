@@ -19,59 +19,14 @@ $(document).ready(function() {
 
 		var resourceUri = '/jcore/ajax/?res=/hello-world';
 		self.resource = jCore.synchronize(resourceUri, function() {
+			// Create function
 			return ko.observable();
-		}, function(data) {
-			if (data.error === 0) {
-				self.resource(data.value);
-			}
+		}, function(value) {
+			// Update function
+			self.resource(value.arr[1]);
 		});
 
 	//	setInterval(self.resource.synchronize, 1000);
-
-		/*
-
-		self.datetime = jCore.synchronize('/jcore/ajax/?res=10', function() {
-			var create = function(options) {
-				return ko.observable(ZeroPad(options.data, 2));
-			};
-
-			var update = function(options) {
-				return ZeroPad(options.data, 2);
-			};
-
-			var propertyMapping = {
-				create: create,
-				update: update
-			};
-
-			var mapping = {
-				'minutes': propertyMapping,
-				'seconds': propertyMapping,
-				'mday': {
-					create: function(options) {
-						return ko.observable(options.data+', ');
-					},
-					update: function(options) {
-						return options.data+', ';
-					}
-				}
-			};
-
-			return ko.mapping.fromJS({
-				month:'',
-				mday:'',
-				hours:'0',
-				minutes:'0',
-				seconds:'0'
-			}, mapping);
-
-		}, function(data) {
-			ko.mapping.fromJS(data, self.datetime);
-		});
-
-		setInterval(self.datetime.synchronize, 1000);
-
-		 */
 	}
 
 	ko.applyBindings(new JCoreViewModel());

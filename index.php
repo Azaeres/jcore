@@ -27,6 +27,7 @@ $defaultJs = $doc->js;
 $doc->js = function($chain) use ($defaultJs) {
 	?>
 	<script src="js/libs/json3.min.js"></script>
+	<script src="js/libs/jshash-2.2/sha256-min.js"></script>
 	<script src="js/libs/jcore-client-0.0.1.js"></script>
 	<script src="js/libs/knockout-2.1.0.js"></script>
 	<script src="js/libs/knockout.mapping-latest.js"></script>

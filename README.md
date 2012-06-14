@@ -28,11 +28,9 @@ Example (prototype)
 	self.resource = jCore.synchronize('/jcore/ajax/?res=/hello-world', function() {
 		// Create function
 		return ko.observable();
-	}, function(data) {
+	}, function(value) {
 		// Update function
-		if (data.error === 0) {
-			self.resource(data.value);
-		}
+		self.resource(value.text);
 	});
 
 	// Schedules the model to sync regularly.
