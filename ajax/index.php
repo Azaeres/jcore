@@ -50,10 +50,27 @@ try {
 
 		if ($redis->exists($resKey)) {
 			$value = $redis->get($resKey);
-			$resource['value'] = $value;
 
-			$shaStr = hash('sha256', $value);
-			error_log($shaStr);
+			if (isset($pullRequest->value)) {
+				// Compare values.
+				$clientValue = json_encode($pullRequest->value);
+				if (strcasecmp($clientValue, $value) != 0) {
+					$resource['value'] = $value;
+				}
+				else {
+					$resource['error'] = JC_NO_ERROR;
+				}
+			}
+			else if (isset($pullRequest->hash)) {
+				// Compare hashes.
+				$hash = hash('sha256', $value);
+				if (strcasecmp($pullRequest->hash, $hash) != 0) {
+					$resource['value'] = $value;
+				}
+				else {
+					$resource['error'] = JC_NO_ERROR;
+				}
+			}
 		}
 		else {
 			// Specified uri does not exist.
