@@ -4,7 +4,7 @@ README
 Introduction
 ------------
 
-jCore 0.0.1 - Resource Syncronization
+jCore 0.0.1 - RESTful JSON Network Bindings
 
 Requires the following technologies:
 * Redis 2.4.14
@@ -13,7 +13,7 @@ Requires the following technologies:
 * jQuery 1.7.2
 
 Optional:
-* Knockout 2.1.0 / Knockout Mapping 
+* Knockout 2.1.0 / Knockout Mapping
 
 Installation
 ------------
