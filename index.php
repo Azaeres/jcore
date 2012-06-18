@@ -28,8 +28,8 @@ $doc->js = function($chain) use ($defaultJs) {
 	?>
 	<script src="js/libs/json3.min.js"></script>
 	<script src="js/libs/jshash-2.2/sha256-min.js"></script>
-<?php //	<script src="js/libs/knockout-2.1.0.js"></script> ?>
-	<script src="js/libs/knockout-2.1.0.debug.js"></script>
+	<script src="js/libs/knockout-2.1.0.js"></script>
+<?php //	<script src="js/libs/knockout-2.1.0.debug.js"></script> ?>
 	<script src="js/libs/knockout.mapping-2.1.2.js"></script>
 	<script src="js/libs/jcore-client-0.0.1.js"></script>
 	<?php

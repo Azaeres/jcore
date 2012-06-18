@@ -1,28 +1,40 @@
 <?php
 
-/**
- * jCore inc.php
- * 
- * This file demonstrates the rich information that can be included in
- * in-code documentation through DocBlocks and tags.
+
+/*!
+ * Convenience function for var_dump. 
+ *
+ * Simply calls {@link http://www.php.net/manual/en/function.var-dump.php var_dump} on the argument
+ * passed in. Less typing == better.
+ *
  * @author Ryan Barry <ryanc.barry@yahoo.com>
  * @version 0.0.1
  * @package jCore
+ * 
  */
-
-/**
- * Convenience function for var_dump. Dumps vars as pretty print.
+/*!
+ * @function _d
  *
- * @param  arg The argument to dump.
- */
+ * Convenience function for var_dump. 
+ *  
+ * Simply calls {@link http://www.php.net/manual/en/function.var-dump.php var_dump} on the argument
+ * passed in. Less typing == better.
+ * 
+ * @param  misc $arg The PHP variable to dump.
+*/
 function _d($arg) {
 	var_dump($arg);
 }
 
-/**
- * Simple function chain class.
- *
- * 
+/*!
+     @class FunctionChain
+     @abstract Simple function chain class.
+     @discussion An IOCommandGate instance is an extremely light weight mechanism that
+         executes an action on the driver's work-loop...
+     @throws foo_exception
+     @throws bar_exception
+     @namespace I/O Kit (this is just a string)
+     @updated 2012-06-17
  */
 class FunctionChain {
 
@@ -90,8 +102,12 @@ class FunctionChain {
 }
 
 
+
 /**
  * Inline text element.
+ *
+ * @since 0.0.1
+ * @package jCore
  */
 class InlineText extends FunctionChain {
 	public $className, $text;
@@ -124,8 +140,11 @@ class InlineText extends FunctionChain {
 	}
 }
 
-/*
+/**
  * HTML 5 document chain.
+ *
+ * @since 0.0.1
+ * @package jCore
  */
 class HtmlDoc extends FunctionChain {
 	public $title, $desc, $author, $header, $main, $footer, $js;

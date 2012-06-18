@@ -15,7 +15,8 @@ function ZeroPad(num, count) {
 
 
 jCore.config({
-	root: '/jcore'
+	root: '/jcore',
+	xdebug: false
 });
 
 var viewModel = {

@@ -7,7 +7,8 @@
     //	var hashes = [];
     w.jCore = {};
     var config = {
-        root: ''
+        root: '',
+        xdebug: false
     };
 
     w.jCore.config = function(options) {
@@ -31,6 +32,12 @@
             syncedResources[uri].hash = hash;
         //    console.log('JSON: '+json);
         //    console.log('Generated hash: '+hash);
+        }
+        else {
+            // If the hash wouldn't be lighter than the actual value, we won't cache it.
+            // We will discard whatever hash we have now, if any.
+            if (typeof syncedResources[uri].hash !== 'undefined')
+                delete syncedResources[uri].hash;
         }
     };
 
@@ -71,9 +78,17 @@
             var json = JSON.stringify(pullRequest);
 
             // The URI is required.
-            // This should be scheduled, or throttled, or something.
+            var suffix = '';
+
+            if (config.xdebug) {
+                suffix = '?XDEBUG_PROFILE=1';
+            }
+
+            var url = config.root+'/ajax/'+suffix;
+            console.log(url);
+
             $.ajax({
-                url: config.root+'/ajax/',
+                url: url,
                 type: 'POST',
                 data: {
                     pull: json

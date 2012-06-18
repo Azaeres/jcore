@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdoc>
+  <parser>
+    <target>output</target>
+  </parser>
+  <transformer>
+    <target></target>
+  </transformer>
+  <files>
+    <file>../inc.php</file>
+    <file>../ajax/index.php</file>
+  </files>
+  <logging>
+    <level>warn</level>
+    <paths>
+      <default>{APP_ROOT}/data/log/{DATE}.log</default>
+      <errors>{APP_ROOT}/data/log/{DATE}.errors.log</errors>
+    </paths>
+  </logging>
+</phpdoc>
