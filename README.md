@@ -4,141 +4,87 @@ README
 Introduction
 ------------
 
-jCore 0.0.1 - RESTful JSON Network Bindings
+jCore 0.0.2 - RESTful JSON Network Bindings
 
-Requires the following technologies:
-* Redis 2.4.14
-* PHP 5.3.10
+Depends on, and includes, the following technologies:
+
 * JSON 3
 * jQuery 1.7.2
+* Knockout 2.1.0
+* Knockout Mapping
 
-Optional:
-* Knockout 2.1.0 / Knockout Mapping
+Requires:
+
+* Redis 2.4.14
+* PHP 5.3.10
 
 Installation
 ------------
 
-1. Place this project under your web root.
+1. [Install Redis](http://redis.io/download).
+2. Place the jCore project under your web root.
 
-That's it. No, really. 
-
-Example (0.0.1)
+Example (0.0.2)
 -------------------
 
-Note: jCore is designed to "play nice" with Knockout, but is not tightly coupled to it.
+You can place your custom client code in `js/script.js`. Here's an example of what a basic client could look like:
 
-	self.resource = jCore.synchronize('/jcore/ajax/?res=/hello-world', function() {
-		// Create function
-		return ko.observable();
-	}, function(value) {
-		// Update function
-		self.resource(value);
+	jCore.config({
+		root: '/jcore',
+		xdebug: false
 	});
 
-	// Schedules the model to sync regularly.
-	setInterval(self.resource.synchronize, 1000);
+	var viewModel = {
+		resource: jCore.sync({
+			// The URI of the resource to sync with.
+			uri: '/hello-world',
+
+			// All the properties you declare here will be data-bound.
+			// You can set up Knockout declarative bindings to refer to them in your markup.
+
+			// <div data-bind="resource.text"></div>
+			// <div data-bind="resource.arr()[1]"></div>
+			init: { text:'', arr:'' }
+		}),
+		test: jCore.sync({
+			uri: '/test',
+			init: { foo:'' }
+		})
+	};
+
+	// Subscribe to changes to a specific observable property.
+	viewModel.test.foo.subscribe(function(newValue) {
+		console.log(newValue);
+	});
+	 
+ 	ko.applyBindings(viewModel);
+
 
 Discussion
 ==========
 
-Proposal 0.0.2a - The Server as a Notification Center
-------------------------------------------------
+Power to the Clients
+--------------------
 
-The idea here is that syncing gives you an opportunity to provide a callback function
-that is called when the jCore client detects a change with that resource.
+The "cloud" used to refer to a collection of vague, next-gen networking techniques. Now, it's more clearly defined, but has been defined by organizations with big data centers. They are steering the "cloud" toward being "an online place where your stuff can reside". Using this kind of cloud (now becoming difficult to avoid) provides some benefits, including ubiquitous accessibility, automatic backups, consistency across platforms, automatic software updates, etc. 
 
-	self.model = ko.observable();
+Privacy is not one of them.
 
-	jCore.sync({
-		uri: '/jcore/ajax/?res=/hello-world',
-		notify: function(oldValue, newValue) {
-			// This is called when the resource at the specified uri changes.
-			// This design further decouples the network bindings from the client-side model.
-			
-			// It could provide a 'values' array of the snapshots of the resource that 
-			//	show the changes that have occurred since the client's version.
-			// One advantage with this is that the client shouldn't miss any changes.
-			// This would need the server to keep track of every change that occurs with
-			//	its resources.
-			// This could also result in greatly increasing the amount of transferred data.
+jCore's cloud philosophy makes the server a simple client hub, and gives power to its clients. A user's data is meant to reside on their own machine, and is accessible to only those they specifically grant. HTML5 makes this possible.
 
-			// Otherwise, we could provide just the new value (and the client's old value)
-			//	so that the client receives the latest version of the resource.
-		},
-		get: function() {
-			// This gives the sync function a way of getting the client-side resource value.
-			return self.model();
-		},
-		set: function(value) {
-			// This gives the sync function a way of setting the client-side resource value.
-			self.model(value);
-		}
-	});
+jCore is a server/network abstraction, so that you can focus on giving your client power. A jCore server is part resource repository, part notification center. Sync a client-side model with a server-side resource, and it will refresh its state regularly. Using Knockout, you can subscribe to changes with the model, or you can simply let your data bindings flash the update through to the DOM. 
 
-Behind the scenes, the sync function schedules pull requests, checks the response, 
-and decides whether to notify the client.
 
-Proposal 0.0.2b - Network Data Bindings
-----------------------------------
+Network Performance
+-------------------
 
-The idea here is that jCore keeps its own model, but allows for custom client-side bindings.
-If we do this, jCore would greatly benefit from requiring Knockout (and possibly its Mapping 
-plugin). The problem with this is that it is yet another tight coupling between libraries.
-Another advantage with this proposal is that it has a much simpler API than 0.0.2a, and 
-could even be faster to develop.
+jCore 0.0.2 does not make use of server-sent events (although a future version might). It uses the standard HTTP request-response model, polling the server for changes. Since this activity is common in jCore 0.0.2, making this efficient was a priority. If the resource hasn't changed, checking the server results in around 20 bytes of transferred data for each synced resource, with an average latency of about 16 ms (regardless of the size of the resource). On the other hand, if the resource has changed, the client downloads the entire JSON resource value. So, make changes to resources only when necessary, and only syncronize what you need. 
 
-	var self = this;
 
-	// 'sync' returns a Knockout observable and promptly schedules sync requests.
-	// All scheduled sync requests are sent out in one batch HTTP request.
-	// Every 5 seconds might be reasonable.
-	// Note: Knockout has a throttling feature that might be useful here.
-	self.resource = jCore.sync({
-		uri: '/jcore/ajax/?res=/hello-world',	// The resource id, or URI.
-		write: false	// Do we want write access to this resource? Default is false.
-	});
-
-	// Since the jCore resource is a Knockout observable, the client can subscribe to 
-	// be notified of its changes.
-	// This is what jCore does to generate hashes of the resource value.
-	self.resource.subscribe(function(newValue) {
-	    console.log("The person's new name is " + newValue);
-	});
-
-	// Getting the value of a resource.
-	var value = self.resource();
-
-	// Setting the value of a resource.
-	// The setter for readonly resources is really only used internally by the jCore client 
-	//	when it gets responses to its sync requests.
-	// If you use it yourself, you'll just change it temporarily (causing your subscribers 
-	//	to be notified) until the next sync overwrites your change. Readonly resources do not
-	// 	send change requests to the server. 
-	// At any rate, so that jCore's internal state doesn't get messed up when you do this, 
-	//	jCore itself subscribes to the observable's changes in order to generate hashes when 
-	//	it's set.
-	self.resource('New value');
-
-Sync requests always contain the URI of the resource to sync, and the client-side resource 
-value (or its hash, whichever would be quicker to transfer). Note: that the resource value 
-can be empty.
-
-The server compares the request value with the server-side value (if the request has a hash 
-instead, it compares the request hash with the server-side hash). 
-
-Note: I expect that as long as the conditions are the same on both the server and the client (same 
-hashing algorithm, same resource value), both machines will generate the same hash independently. 
-This should be researched and tested, though. If this is true, we can trim the amount of data 
-transferred over the network since we don't need to send a value with its hash.
-
-If the request value matches the server value, the server responds with a lightweight "synced" code.
-If it doesn't match, the server simply responds with a snapshot of the current server-side value of 
-the resource. The client generates a hash of the value (if the hash string would be lighter weight 
-than the JSON string of the value), and then uses the Knockout setter to store the new value 
-(notifying any of its subscribers).
-
-Proposal 0.0.3 - Write Access to jCore Resources
+Proposal 0.0.3a - Write Access to jCore Resources
 -------------------------------------------------
+
+Configuring jCore to sync a writeable resource:
 
 	var self = this;
 
@@ -174,13 +120,11 @@ would with a sync request: it sends back a snapshot of the current server-side v
 
 However, if it matches, the server sets the server-side resource value to the request's new value (and generates its hash), then sends back a lightweight "synced" code.
 
-This means that if the client sets its local copy of the resource, it might go through, or it might 
-result in a sync response that overwrites its intended change. At that point, if the client has 
-provided a merge function, it is called. Otherwise, the default is to simply keep the server's value
-and discard the client's. 
+This means that if the client sets its local copy of the resource, it might go through or it might not. If it doesn't, its merge function is called. If it doesn't provide a merge function, the client-side value is overwritten. 
 
-Proposal 0.0.4 - Key-based Security Model
+Proposal 0.0.3b - Key-based Security Model
 -----------------------------------------
+
 
 
 
