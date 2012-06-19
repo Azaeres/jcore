@@ -1,6 +1,6 @@
-/*
- *
- */
+/*!
+ This is a comment about FunctionName.
+*/
 
 (function(w, undefined) {
 
@@ -85,7 +85,7 @@
             }
 
             var url = config.root+'/ajax/'+suffix;
-            console.log(url);
+        //    console.log(url);
 
             $.ajax({
                 url: url,
@@ -135,6 +135,14 @@
         var resource = ko.mapping.fromJS(options.init);
         if (typeof options.uri !== 'undefined') {
 
+            // Ensures that we're not already syncing this resource.
+            // Not sure it's a good idea to mirror a resource multiple times (for performance
+            // reasons), so we'll just throw an error.
+            //
+            if (typeof syncedResources[options.uri] !== 'undefined') {
+                throw('"'+options.uri+'" is being synced more than once');
+            }
+
             syncedResources[options.uri] = {
                 value: resource
             //  hash: ''
@@ -155,10 +163,4 @@
 
         return resource;
     };
-
-    //	var hash = hex_sha256("string");
-    //	var hmac = hex_hmac_sha256("key", "data");
-    //	console.log(hash);
-    //	console.log(hmac);
-
 })(window);

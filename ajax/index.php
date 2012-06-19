@@ -149,7 +149,7 @@ function ajaxGateway() {
 	}
 	catch (Exception $e) {
 	//	echo "Couldn't connect to Redis";
-		$batchResponse['error'] = JC_DB_CONNECT_ERROR;
+		$batchResponse['error'] = JC_DB_CONNECT_ERROR.' Could not connect to database';
 		$batchResponse['desc'] = $e->getMessage();
 	}
 

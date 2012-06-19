@@ -141,18 +141,18 @@ class InlineText extends FunctionChain {
 }
 
 /**
- * HTML 5 document chain.
- *
- * @since 0.0.1
- * @package jCore
+ * HTML 5 document template.
  */
-class HtmlDoc extends FunctionChain {
+class HtmlDoc {
 	public $title, $desc, $author, $header, $main, $footer, $js;
+	public $root;
 
-	public function __construct() {
-		parent::__construct(array(
-			function($chain) {
-				?><!doctype html>
+	public function __construct($root = '') {
+		$this->root = $root;
+	}
+
+	public function render() {
+			?><!doctype html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
@@ -161,26 +161,26 @@ class HtmlDoc extends FunctionChain {
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-	<title><?php $chain->next(); ?></title>
-	<meta name="description" content="<?php $chain->next(); ?>">
-	<meta name="author" content="<?php $chain->next(); ?>">
+	<title><?php $this->title(); ?></title>
+	<meta name="description" content="<?php $this->desc(); ?>">
+	<meta name="author" content="<?php $this->author(); ?>">
 
 	<meta name="viewport" content="width=device-width">
 
-	<?php $chain->next(); ?>
+	<?php $this->css(); ?>
 
-	<script src="js/libs/modernizr-2.5.3.min.js"></script>
+	<script src="<?php echo $this->root; ?>js/libs/modernizr-2.5.3.min.js"></script>
 </head>
 <body>
-	<header><?php $chain->next(); ?></header>
-	<div role="main"><?php $chain->next(); ?></div>
-	<footer><?php $chain->next(); ?></footer>
+	<header><?php $this->header(); ?></header>
+	<div role="main"><?php $this->main(); ?></div>
+	<footer><?php $this->footer(); ?></footer>
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.2.min.js"><\/script>')</script>
 
 	<!-- scripts concatenated and minified via ant build script-->
-	<?php $chain->next(); ?>
+	<?php $this->js(); ?>
 	<!-- end scripts-->
 
 	<script>
@@ -191,51 +191,29 @@ class HtmlDoc extends FunctionChain {
 	</script>
 
 </body>
-</html>
-<?php
-			}
-			// Title
-			,function($chain) {
-				echo 'Untitled';
-			}
-			// Description
-			,function($chain) {
-			}
-			// Author
-			,function($chain) {
-			}
-			// CSS
-			,function($chain) {
-				?>
-					<link rel="stylesheet" href="css/style.css">
-				<?php
-			}
-			// Header
-			,function($chain) {
-			}
-			// Main
-			,function($chain) {
-			}
-			// Footer
-			,function($chain) {
-			}
-			// Javascript includes
-			,function($chain) {
-				?>
-					<script src="js/plugins.js"></script>
-					<script src="js/script.js"></script>
-				<?php
-			}
-		));
+</html><?php
+	}
 
-		$this->title = &$this->chain[1];
-		$this->desc = &$this->chain[2];
-		$this->author = &$this->chain[3];
-		$this->css = &$this->chain[4];
-		$this->header = &$this->chain[5];
-		$this->main = &$this->chain[6];
-		$this->footer = &$this->chain[7];
-		$this->js = &$this->chain[8];
+	public function title() {
+		echo 'Untitled';
+	}
+
+	public function desc() {}
+	public function author() {}
+	public function css() {
+		?>
+			<link rel="stylesheet" href="<?php echo $this->root; ?>css/style.css">
+		<?php
+	}
+
+	public function header() {}
+	public function main() {}
+	public function footer() {}
+	public function js() {
+		?>
+			<script src="<?php echo $this->root; ?>js/plugins.js"></script>
+			<script src="<?php echo $this->root; ?>js/script.js"></script>
+		<?php
 	}
 }
 
