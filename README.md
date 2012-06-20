@@ -125,7 +125,7 @@ This means that if the client sets its local copy of the resource, it might go t
 Proposal 0.0.3b - Key-based Security Model
 -----------------------------------------
 
-
+(To be discussed)
 
 
 
