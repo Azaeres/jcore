@@ -1,3 +1,3 @@
-[submodule "predis"]
-	path = predis
+[submodule "libs/php/predis"]
+	path = libs/php/predis
 	url = git://github.com/nrk/predis.git
