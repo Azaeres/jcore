@@ -1,9 +1,9 @@
 <?php
 
-include('../inc.php');
+$info = pathinfo(getcwd());
+define('JCORE_PROJECT', $info['dirname'].'/');
 
-//* @param int    $example  This is an example function/method parameter description.
-//* @param string $example2 This is a second example.
+require_once(JCORE_PROJECT.'libs/php/jcore-server.inc.php');
 
 define('JC_NO_ERROR', 0);
 define('JC_DB_CONNECT_ERROR', 1);
@@ -53,7 +53,7 @@ function ajaxGateway() {
 	$batchResponse = array();
 
 	try {
-		require "../predis/autoload.php";
+		require_once(JCORE_PROJECT."libs/php/predis/autoload.php");
 		Predis\Autoloader::register();
 
 		$redis = new Predis\Client();
@@ -94,7 +94,7 @@ function ajaxGateway() {
 						$resource['value'] = $value;
 					}
 					else {
-						$resource['error'] = JC_NO_ERROR;
+						$resource['_'] = JC_NO_ERROR;
 					}
 				}
 				else if (isset($pullRequest->hash)) {
@@ -131,17 +131,17 @@ function ajaxGateway() {
 						$resource['value'] = $value;
 					}
 					else {
-						$resource['error'] = JC_NO_ERROR;
+						$resource['_'] = JC_NO_ERROR;
 					}
 				}
 				else {
 					// No value or hash means this is an improperly formed request.
-					$resource['error'] = JC_INVALID_REQUEST;
+					$resource['_'] = JC_INVALID_REQUEST;
 				}
 			}
 			else {
 				// Specified uri does not exist.
-			    $resource['error'] = HTTP_NOT_FOUND;
+			    $resource['_'] = HTTP_NOT_FOUND;
 			}
 
 			$batchResponse[$uri] = $resource;
@@ -149,7 +149,7 @@ function ajaxGateway() {
 	}
 	catch (Exception $e) {
 	//	echo "Couldn't connect to Redis";
-		$batchResponse['error'] = JC_DB_CONNECT_ERROR.' Could not connect to database';
+		$batchResponse['_'] = JC_DB_CONNECT_ERROR.' Could not connect to database';
 		$batchResponse['desc'] = $e->getMessage();
 	}
 

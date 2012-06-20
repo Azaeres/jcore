@@ -99,9 +99,9 @@
                     batchResponse = JSON.parse(batchResponse);
                 //    console.log(batchResponse);
 
-                    if (typeof batchResponse.error === 'undefined') {
+                    if (typeof batchResponse._ === 'undefined') {
                         $.each(batchResponse, function(uri, response) {
-                            if (typeof response.error === 'undefined') {
+                            if (typeof response._ === 'undefined') {
                                 var value = JSON.parse(response.value);
                                 ko.mapping.fromJS(value, syncedResources[uri].value);
 
@@ -109,14 +109,14 @@
 
                             //    console.log(ko.mapping.toJS(syncedResources));
                             }
-                            else if (response.error === 0) {
+                            else if (response._ === 0) {
                                 // Server is saying we're in sync.
                                 // Nothing needs to be done.
                             //    console.log(ko.mapping.toJS(syncedResources));
                             }
                             else {
                                 var err = new Error();
-                                err.name = 'Error ' + response.error;
+                                err.name = 'Error ' + response._;
                                 err.message = batchResponse.desc;
                                 throw (err);
                             }
@@ -124,7 +124,7 @@
                     }
                     else {
                         var err = new Error();
-                        err.name = 'Error ' + batchResponse.error;
+                        err.name = 'Error ' + batchResponse._;
                         err.message = batchResponse.desc;
                         throw (err);
                     }

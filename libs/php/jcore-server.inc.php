@@ -169,7 +169,7 @@ class HtmlDoc {
 
 	<?php $this->css(); ?>
 
-	<script src="<?php echo $this->root; ?>js/libs/modernizr-2.5.3.min.js"></script>
+	<script src="<?php echo $this->root; ?>libs/js/modernizr-2.5.3.min.js"></script>
 </head>
 <body>
 	<header><?php $this->header(); ?></header>

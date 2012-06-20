@@ -1,6 +1,9 @@
 <?php
 
-require_once('../inc.php');
+$info = pathinfo(getcwd());
+define('JCORE_PROJECT', $info['dirname'].'/');
+
+require_once(JCORE_PROJECT.'libs/php/jcore-server.inc.php');
 require_once('php-markdown/markdown.php');
 
 
@@ -31,7 +34,6 @@ class DocumentationViewer extends HtmlDoc {
 			</div>
 			<?php
 		}
-
 	}
 }
 
