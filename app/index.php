@@ -13,6 +13,31 @@ define('DEBUG', 1);
 
 
 class jCore extends HtmlDoc {
+	public function title() {
+		echo 'jCore v0.0.2';
+	}
+	public function desc() {
+		$this->title();
+	}
+	public function author() {
+		echo 'Ryan Barry';
+	}
+	public function css() {
+		if (!DEBUG) {
+			// Replace XXXX below with the name of your built css file.
+			?>
+				<link rel="stylesheet" href="<?php echo $this->root; ?>app/css/XXXX.css">
+			<?php
+		}
+		else {
+			?>
+				<link rel="stylesheet" href="<?php echo $this->root; ?>app/css/style.css">
+			<?php
+		}
+		?>
+			<link rel="stylesheet" href="<?php echo $this->root; ?>css/jcore.css">
+		<?php
+	}
 	public function js() {
 		?>
 		<script src="<?php echo $this->root; ?>libs/js/json3.min.js"></script>
@@ -34,28 +59,6 @@ class jCore extends HtmlDoc {
 				<script src="<?php echo $this->root; ?>app/js/script.js"></script>
 			<?php
 		}
-	}
-	public function css() {
-		if (!DEBUG) {
-			?>
-				<link rel="stylesheet" href="<?php echo $this->root; ?>app/css/XXXX.css">
-			<?php
-		}
-		else {
-			?>
-				<link rel="stylesheet" href="<?php echo $this->root; ?>css/jcore.css">
-				<link rel="stylesheet" href="<?php echo $this->root; ?>app/css/style.css">
-			<?php
-		}
-	}
-	public function title() {
-		echo 'jCore v0.0.2';
-	}
-	public function desc() {
-		$this->title();
-	}
-	public function author() {
-		echo 'Ryan Barry';
 	}
 	public function main() {
 		/*

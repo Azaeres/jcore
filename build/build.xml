@@ -567,18 +567,34 @@
         <fileset dir="${dir.source}/${dir.js}" excludes="${file.js.bypass}, **/*.min.js" includes="**/*.js">
           <exclude name="${dir.js}/otherscripts-concat.js"/>
           <exclude name="${dir.js}/scripts-concat.js"/>
+          <include name="${dir.js.libs}/jcore-client.js"/>
         </fileset>          
-          <arg line="-jar"/>
-          <arg path="./${dir.build.tools}/closure-compiler-v1346.jar"/>
-          <arg line="--js"/>
-    <srcfile/>
-    <arg line="--compilation_level" />
-     <arg value="${scripts.compilation.level}" />
-     <arg line="--warning_level" />
-     <arg value="${scripts.compilation.warninglevel}" />
-     <arg line="--js_output_file" />
-     <mapper type="glob" from="*.js" to="${basedir}/${dir.intermediate}/${dir.js}/*.js"/>
-          <targetfile/>
+        <arg line="-jar"/>
+        <arg path="./${dir.build.tools}/closure-compiler-v1346.jar"/>
+        <arg line="--js"/>
+        <srcfile/>
+        <arg line="--compilation_level" />
+        <arg value="${scripts.compilation.level}" />
+        <arg line="--warning_level" />
+        <arg value="${scripts.compilation.warninglevel}" />
+        <arg line="--js_output_file" />
+        <mapper type="glob" from="*.js" to="${basedir}/${dir.intermediate}/${dir.js}/*.js"/>
+        <targetfile/>
+      </apply>
+      <apply executable="java" parallel="false">
+        <fileset dir="${dir.source}/${dir.js.libs}" excludes="${file.js.bypass}, **/*.min.js" includes="**/*.js">
+        </fileset>          
+        <arg line="-jar"/>
+        <arg path="./${dir.build.tools}/closure-compiler-v1346.jar"/>
+        <arg line="--js"/>
+        <srcfile/>
+        <arg line="--compilation_level" />
+        <arg value="${scripts.compilation.level}" />
+        <arg line="--warning_level" />
+        <arg value="${scripts.compilation.warninglevel}" />
+        <arg line="--js_output_file" />
+        <mapper type="glob" from="*.js" to="${basedir}/${dir.intermediate}/${dir.js.libs}/*.js"/>
+        <targetfile/>
       </apply>
 
       <!-- at this point all js files are minified with their original names -->
@@ -590,6 +606,10 @@
             <exclude name="otherscripts-concat.js"/>
             <exclude name="plugins.js"/>
             <exclude name="${file.root.script}"/>
+        </fileset>
+      </copy>
+      <copy todir="${dir.publish}/${dir.js.libs}">
+        <fileset dir="${dir.intermediate}/${dir.js.libs}" includes="**/*.js">
         </fileset>
       </copy>
   </target>
@@ -945,6 +965,15 @@
             <srcfile/>
             <arg line="-o"/>
             <mapper type="glob" from="*.css" to="${basedir}/${dir.publish}/${dir.css}/*.css"/>
+            <targetfile/>
+        </apply>
+        <apply executable="java" parallel="false">
+            <fileset dir="${dir.source}/${dir.css.libs}/" excludes="${concat-files}" includes="**/*.css"/>
+            <arg line="-jar"/>
+            <arg path="${dir.build.tools}/${tool.yuicompressor}"/>
+            <srcfile/>
+            <arg line="-o"/>
+            <mapper type="glob" from="*.css" to="${basedir}/${dir.publish}/${dir.css.libs}/*.css"/>
             <targetfile/>
         </apply>
         <foreach list="${file.stylesheets}" param="css_file" target="-css-remove-concatenated-stylesheets" />
