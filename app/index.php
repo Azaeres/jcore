@@ -63,12 +63,11 @@ class jCore extends HtmlDoc {
 	public function main() {
 		/*
 			Server time: <span data-bind='text: datetime.month'>Syncing...</span> <span data-bind='text: datetime.mday'></span> <span data-bind='text: datetime.hours'>0</span>:<span data-bind='text: datetime.minutes'>00</span>:<span data-bind='text: datetime.seconds'>00</span>.
-<code data-bind="text: test.foo"></code>
 		 */
 		?>
 			<div class="box">
 				<code data-bind="text: resource.text"></code><br/>
-				
+				<code data-bind="text: test.foo"></code>
 			</div>
 			<code class="debug" data-bind="text: ko.toJSON(viewModel)"></code>
 		<?php

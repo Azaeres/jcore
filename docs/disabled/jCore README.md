@@ -122,11 +122,6 @@ However, if it matches, the server sets the server-side resource value to the re
 
 This means that if the client sets its local copy of the resource, it might go through or it might not. If it doesn't, its merge function is called. If it doesn't provide a merge function, the client-side value is overwritten. 
 
-Proposal 0.0.3b - Key-based Security Model
------------------------------------------
-
-
-
 
 
 

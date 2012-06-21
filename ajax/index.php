@@ -56,12 +56,15 @@ function ajaxGateway() {
 		require_once(JCORE_PROJECT."libs/php/predis/autoload.php");
 		Predis\Autoloader::register();
 
-		$redis = new Predis\Client();
+		require_once('db-connect.php');
+		
+	//	$redis = new Predis\Client();
 
-	//	$redis = new Predis\Client(array(
-	//		"scheme" => "tcp",
-	//		"host" => "127.0.0.1",
-	//		"port" => 6379));
+		$redis = new Predis\Client(array(
+			"scheme" => DB_SCHEME,
+			"host" => DB_HOST,
+			"port" => DB_PORT,
+			"password" => DB_PASSWORD));
 
 		//	$redis->set('/hello-world', 'Hello, jCore!');
 

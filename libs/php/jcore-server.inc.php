@@ -166,6 +166,7 @@ class HtmlDoc {
 	<meta name="author" content="<?php $this->author(); ?>">
 
 	<meta name="viewport" content="width=device-width">
+	<link rel="icon" href="<?php echo $this->favicon(); ?>">
 
 	<?php $this->css(); ?>
 
@@ -214,6 +215,9 @@ class HtmlDoc {
 			<script src="<?php echo $this->root; ?>js/plugins.js"></script>
 			<script src="<?php echo $this->root; ?>js/script.js"></script>
 		<?php
+	}
+	public function favicon() {
+		return 'app/img/favicon.ico';
 	}
 }
 
