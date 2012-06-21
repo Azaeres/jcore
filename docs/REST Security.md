@@ -76,7 +76,10 @@ Example usage:
 		// Declare the properties you will use here.
 		// If you don't, then Knockout won't apply bindings to them.
 		// data-bind="resource.text" or data-bind="resource.arr()[1]"
-		init: { text:'', arr:'' }
+		init: { text:'', arr:'' },
+
+		// Tells jCore to expect to need to sign the resource.
+		locked: true
 	}
 
 1. The server gives a userId and a secret passkey to the user (through another service, like email).
